@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bonfire_multiplayer/pages/home/home_page.dart';
 import 'package:bonfire_multiplayer/pages/home/home_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -184,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
         if(_pinCodeFormKey.currentState!.validate() && _emailFormKey.currentState!.validate()) {
           final res = await controller.register(_emailCtrl.text, captcha: _pinCodeCtrl.text);
           if(res.success) {
-            Get.offAllNamed(HomeRoute.name);
+            Get.offAllNamed(HomePage.routeName);
           } else {
             _snackMessage(res.msg);
           }
@@ -230,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
       final controller = Get.find<AccountController>();
       final res = await controller.login(factory: showDialog);
       if(res.success) {
-        Get.offAllNamed(HomeRoute.name);
+        Get.offAllNamed(HomePage.routeName);
       } else {
         _snackMessage(res.msg);
       }

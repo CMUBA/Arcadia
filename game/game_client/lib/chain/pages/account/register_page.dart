@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bonfire_multiplayer/pages/home/home_page.dart';
 import 'package:bonfire_multiplayer/pages/home/home_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -110,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
         if(_pinCodeFormKey.currentState!.validate() && _emailFormKey.currentState!.validate()) {
           final res = await controller.register(_emailCtrl.text, captcha: _pinCodeCtrl.text);
           if(res.success) {
-            Get.offAllNamed(HomeRoute.name);
+            Get.offAllNamed(HomePage.routeName);
           } else {
             _snackMessage(res.msg);
           }

@@ -4,6 +4,7 @@ import 'package:bonfire_multiplayer/data/websocket/websocket_provider.dart';
 import 'package:bonfire_multiplayer/event/battle_event.dart';
 import 'package:bonfire_multiplayer/pages/game/game_route.dart';
 import 'package:bonfire_multiplayer/pages/home/bloc/home_bloc.dart';
+import 'package:bonfire_multiplayer/pages/home/home_page.dart';
 import 'package:bonfire_multiplayer/pages/home/home_route.dart';
 import 'package:bonfire_multiplayer/util/my_page_transition.dart';
 import 'package:flutter/foundation.dart';
@@ -74,7 +75,7 @@ class MyApp extends StatelessWidget {
             navigatorKey: Get.key,
             navigatorObservers: [GetObserver()],
             getPages: routes,
-            initialRoute: HomeRoute.name,
+            initialRoute: HomePage.routeName,
             themeMode: ThemeMode.system,
             builder: EasyLoading.init(builder: (ctx, child){
               EasyLoading.instance.indicatorType = EasyLoadingIndicatorType.ring;
@@ -98,10 +99,6 @@ class MyApp extends StatelessWidget {
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate
             ],
-            routes: {
-              ...HomeRoute.builder,
-              ...GameRoute.builder,
-            },
             translations: AppTranslations(),
             supportedLocales: AppTranslations.supportedLocales,
             locale: AppTranslations.locale ?? Get.deviceLocale,//const Locale('zh', 'CN'),

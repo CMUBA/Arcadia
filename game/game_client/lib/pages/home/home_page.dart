@@ -1,11 +1,15 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:bonfire_multiplayer/pages/game/game_page.dart';
 import 'package:bonfire_multiplayer/pages/game/game_route.dart';
 import 'package:bonfire_multiplayer/pages/home/bloc/home_bloc.dart';
 import 'package:bonfire_multiplayer/util/player_skin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
+  static const routeName = '/';
+
   const HomePage({super.key});
 
   @override
@@ -39,7 +43,7 @@ class _HomePageState extends State<HomePage> {
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
         if (state.ackEvent != null) {
-          GameRoute.open(context, state.ackEvent!);
+          Get.toNamed(GamePage.routeName, arguments: state.ackEvent!);
         }
       },
       builder: (context, state) {

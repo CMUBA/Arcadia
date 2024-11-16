@@ -14,20 +14,27 @@ import 'package:bonfire_multiplayer/main.dart';
 import 'package:bonfire_multiplayer/npc/critter.dart';
 import 'package:bonfire_multiplayer/npc/wizard.dart';
 import 'package:bonfire_multiplayer/pages/game/game_route.dart';
+import 'package:bonfire_multiplayer/pages/home/home_page.dart';
 import 'package:bonfire_multiplayer/pages/home/home_route.dart';
 import 'package:bonfire_multiplayer/util/extensions.dart';
 import 'package:bonfire_multiplayer/util/player_skin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:shared_events/shared_events.dart';
 
 import '../../event/random_event_manager.dart';
 import '../../interface/my_game_interface.dart';
 
 class GamePage extends StatefulWidget {
-  final JoinMapEvent event;
+  static const routeName = '/game';
+
+  late JoinMapEvent event;
   static const tileSize = 16.0;
-  const GamePage({super.key, required this.event});
+
+  GamePage({super.key}){
+    event = Get.arguments as JoinMapEvent;
+  }
 
   @override
   State<GamePage> createState() => _GamePageState();
@@ -222,7 +229,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
     this.game = game;
     _eventManager = context.read();
     _eventManager.onDisconnect(() {
-      HomeRoute.open(context);
+      Get.offAllNamed(HomePage.routeName);
     });
 
     _eventManager.onPlayerState(
@@ -294,6 +301,6 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
   }
 
   void _onAckJoint(JoinMapEvent event) {
-    GameRoute.open(context, event);
+    Get.offAllNamed(GamePage.routeName, arguments: event);
   }
 }
